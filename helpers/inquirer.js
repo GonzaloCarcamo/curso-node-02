@@ -4,9 +4,38 @@ import inquirer from 'inquirer';
 const preguntas = [
     {
         type: 'list',
-        name: 'Opción',
+        name: 'opcion',
         message: 'What task would you like to perform?',
-        choices: ['opt1', 'opt2', 'opt3']
+        choices: [
+            {
+                value: 1,
+                name: '1. Crear Tarea'
+            },
+            {
+                value: 2,
+                name: '2. Listar Tareas'
+            },
+            {
+                value: 3,
+                name: '3. Listar Tareas Completadas'
+            },
+            {
+                value: 4,
+                name: '4. Listar Tareas Pendientes'
+            },
+            {
+                value: 5,
+                name: '5. Completar Tareas'
+            },
+            {
+                value: 6,
+                name: '6. Borrar Tareas'
+            },
+            {
+                value: 0,
+                name: '0. Salir'
+            },
+        ]
     }
 ]
 
@@ -17,9 +46,21 @@ const inquirerMenu = async () => {
     console.log('Select an option'.green);
     console.log('====================== \n'.green);
 
-    const opt = await inquirer.prompt(preguntas);
-
-    return opt;
+    const { opcion } = await inquirer.prompt(preguntas);
+    return opcion;
 }
 
-export { inquirerMenu };
+const pausa = async () => {
+
+    const question = [
+        {
+            type: 'input',
+            name: 'enter',
+            message: `Press ${'ENTER'.green} to continue`
+        }
+    ]
+
+    await inquirer.prompt(question);
+}
+
+export { inquirerMenu, pausa };
